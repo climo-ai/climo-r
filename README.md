@@ -6,15 +6,25 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The climo package is the R interface to the climo.ai platform.
+The climo package is the R interface to the climo.ai platform. With the
+climo package, you can create, evaluate, share, and collaborate on
+clinical models directly from the R language. This package is the main
+driver for federated collaborations whereby multiple users can
+contribute data to fit a model without any user actually sharing data
+with the others. This package also allows you to evaluate other users’
+models on your own data, again without having to actually share any
+data.
+
+The climo.ai platform follows the belief that individuals, labs, and
+companies can contribute a great deal to building better clinical
+prediction models by sharing models rather than entire datasets.
 
 ## Installation
 
-You can install the development version of climo from
-[GitHub](https://github.com/) with:
+You can install the development version of climo with the following
+statement:
 
 ``` r
-# install.packages("devtools")
 devtools::install_github("climo-ai/climo-r")
 ```
 
