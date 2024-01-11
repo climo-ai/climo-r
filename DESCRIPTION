@@ -21,6 +21,7 @@ Imports:
     pins,
     readr,
     readxl,
+    stringr,
     tibble,
     tidyr,
     vetiver
