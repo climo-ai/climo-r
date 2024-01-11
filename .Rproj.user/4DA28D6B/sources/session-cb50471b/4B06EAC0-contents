@@ -1,0 +1,24 @@
+Package: climo
+Type: Package
+Title: R API for climo.ai
+Version: 0.1.0
+Author: Nicholas Cullen
+Maintainer: Nicholas Cullen <nick@climo.ai>
+Description: This package is the R interface for climo.ai. 
+    It allows you to create, share, evaluate, and collaborate on models
+    from the climo.ai platform directly from the R language.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    devtools,
+    dplyr,
+    ggplot2,
+    glue,
+    httr,
+    jsonlite,
+    pins,
+    readr,
+    readxl,
+    vetiver
+RoxygenNote: 7.2.3
