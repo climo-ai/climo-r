@@ -17,8 +17,11 @@ Imports:
     glue,
     httr,
     jsonlite,
+    magrittr,
     pins,
     readr,
     readxl,
+    tibble,
+    tidyr,
     vetiver
 RoxygenNote: 7.2.3
