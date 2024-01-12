@@ -8,16 +8,10 @@
 
 The climo package is the R interface to the climo.ai platform. With the
 climo package, you can create, evaluate, share, and collaborate on
-clinical models directly from the R language. This package is the main
-driver for federated collaborations whereby multiple users can
-contribute data to fit a model without any user actually sharing data
-with the others. This package also allows you to evaluate other users’
-models on your own data, again without having to actually share any
-data.
-
-The climo.ai platform follows the belief that individuals, labs, and
-companies can contribute a great deal to building better clinical
-prediction models by sharing models rather than entire datasets.
+clinical models directly from the R language. The climo.ai platform
+follows the belief that individuals, labs, and companies can contribute
+a great deal to building better clinical prediction models by sharing
+models rather than entire datasets.
 
 ## Installation
 
@@ -28,35 +22,67 @@ statement:
 devtools::install_github("climo-ai/climo-r")
 ```
 
-## Example
+Additionally, to use most of the climo R functions you will need to
+retrieve your API key from the climo.ai platform and set it in your R
+environment. After signing in at climo.ai, you can go to Home \> Profile
+at climo.ai and copy the API key. Then, run the following command to set
+your key in R:
 
-This is a basic example which shows you how to solve a common problem:
+``` r
+Sys.setenv('CLIMO_API_KEY' = '__your key__')
+```
+
+If you want the key to persist between R sessions, you can set the key
+in your R environment by running `usethis::edit_r_environ()` and adding
+the line `CLIMO_API_KEY="__your key__"` to the `.Renviron` file. Now,
+you wont have to set the API key every time you start R.
+
+You can check that your API key is correctly set by running
+`Sys.getenv('CLIMO_API_KEY')`
+
+## Create your own model
+
+A model can be created for the climo.ai platform directly from the climo
+R package by using the `create_model` function. A basic example could be
+that you have just fit a mixed-effects model with the `nlme` package and
+want to share it on the climo.ai platform.
+
+First, you fit the model with your method of choice (here, the `nlme`
+package):
+
+``` r
+library(nlme)
+model <- lme(x ~ y, data)
+```
+
+Now, you can upload the model to climo.ai using the climo R package. To
+create a climo model, you need at least three things: a fitted object
+(e.g., lme object), a name for your climo model, and a clinical area.
 
 ``` r
 library(climo)
-## basic example code
+climo::create_model(model, name="example-model', area='Alzheimers Disease')
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+It’s that simple! Now the model will exist on climo.ai and you can
+navigate to it on the web via the URL
+`climo.ai/{your_username}/example-model`.
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+To note, there are other parameters that can be set in the
+`create_model()` functions – things like giving your model some tags,
+setting the model visibility to private, or assigning your model to an
+organization.
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+### Add details
 
-You can also embed plots, for example:
+### Add inputs
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+### Add display
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+## Evaluate another user’s model
+
+## Contribute data to a federation
+
+## Fit a federated model
+
+## List all models
