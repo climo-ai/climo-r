@@ -74,7 +74,7 @@ There are two types of model inputs: continuous inputs and categorical inputs.
 
 Continuous inputs are represented by sliders for numeric variables. 
 
-# slide image 
+![slider image](man/figures/slider.png)
 
 There are a couple of continuous input variables in our model:
 
@@ -83,7 +83,7 @@ There are a couple of continuous input variables in our model:
 
 Categorical inputs, on the other hand, are represented by dropdowns for discrete variables.
 
-# dropdown image 
+
 ![dropdown image](man/figures/dropdown.png)
 
 

@@ -89,14 +89,15 @@ inputs.
 
 Continuous inputs are represented by sliders for numeric variables.
 
-# slide image
+<figure>
+<img src="man/figures/slider.png" alt="slider image" />
+<figcaption aria-hidden="true">slider image</figcaption>
+</figure>
 
 There are a couple of continuous input variables in our model:
 
 Categorical inputs, on the other hand, are represented by dropdowns for
 discrete variables.
-
-# dropdown image
 
 <figure>
 <img src="man/figures/dropdown.png" alt="dropdown image" />
