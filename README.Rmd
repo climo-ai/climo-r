@@ -84,7 +84,7 @@ There are a couple of continuous input variables in our model:
 Categorical inputs, on the other hand, are represented by dropdowns for discrete variables.
 
 # dropdown image 
-![dropdown image](dropdown.png)
+![dropdown image](man/figures/dropdown.png)
 
 
 There is also one categorical input variable in the model:

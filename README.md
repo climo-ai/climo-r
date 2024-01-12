@@ -99,7 +99,7 @@ discrete variables.
 # dropdown image
 
 <figure>
-<img src="dropdown.png" alt="dropdown image" />
+<img src="man/figures/dropdown.png" alt="dropdown image" />
 <figcaption aria-hidden="true">dropdown image</figcaption>
 </figure>
 
