@@ -74,7 +74,11 @@ create_model <- function(object, name, area, org=NULL, tags=NULL,
                paste(response$response, collapse='\n')))
   }
 
-  return(response)
+
+  # todo: parse out the response
+  model <- response
+  class(model) <- 'climo'
+  return(model)
 }
 
 # add details to model

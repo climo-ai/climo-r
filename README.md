@@ -78,7 +78,7 @@ climo.ai until you create the model signature which tells climo.ai how
 to build the user interface which allows users to interact with your
 model. We’ll show that next:
 
-### Create model inputs
+### Add model inputs
 
 The model inputs make up the interactive user interface to your model on
 the climo.ai platform. They’re necessary if you want users to be able to
@@ -87,14 +87,22 @@ interact with your model at climo.ai.
 There are two types of model inputs: continuous inputs and categorical
 inputs.
 
-Continuous inputs are represented by sliders for numeric variables.
+Continuous inputs are represented by sliders for numeric variables, as
+shown here:
 
 <figure>
 <img src="man/figures/slider.png" alt="slider image" />
 <figcaption aria-hidden="true">slider image</figcaption>
 </figure>
 
-There are a couple of continuous input variables in our model:
+There are a couple of continuous input variables in our model (`AGE` and
+`CDRSB_bl`), so we can create them as follows:
+
+``` r
+age_input <- climo::create_input('AGE', label='Age', type='continuous', min=50, max=90, step=1, initial=70)
+
+cdrsb_input <- climo::create_input('CDRSB_bl', label='Baseline CDR-SB', type='continuous', min=0, max=10, step=0.5, initial=2.5)
+```
 
 Categorical inputs, on the other hand, are represented by dropdowns for
 discrete variables.
@@ -104,7 +112,12 @@ discrete variables.
 <figcaption aria-hidden="true">dropdown image</figcaption>
 </figure>
 
-There is also one categorical input variable in the model:
+There is also one categorical input variable in the model which we can
+create in a similar way:
+
+``` r
+gender_input <- climo::create_input('PTGENDER', label='Gender', type='categorical', options=c('Male','Female'), initial='Female')
+```
 
 You may have noticed that the `time` variable from the model was not
 assigned an input. That’s by design – for longitudinal models, you
@@ -114,6 +127,7 @@ as a continuous input, but give it multiple values and specify that it
 represents the time variable.
 
 ``` r
+time_input <- climo::create_input('time', label='Years from baseline', type='continuous', options=c(0, 0.5, 1, 1.5, 2), is_time=TRUE)
 ```
 
 ### Add model display
