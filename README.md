@@ -61,7 +61,7 @@ climo model, and a clinical area.
 
 ``` r
 library(climo)
-climo::create_model(model, name="example-model', area='Alzheimers Disease')
+climo_model <- climo::create_model(model, name="example-model', area='Alzheimers Disease')
 ```
 
 It’s that simple! Now the model will exist on climo.ai and you can
@@ -90,10 +90,7 @@ inputs.
 Continuous inputs are represented by sliders for numeric variables, as
 shown here:
 
-<figure>
-<img src="man/figures/slider.png" alt="slider image" />
-<figcaption aria-hidden="true">slider image</figcaption>
-</figure>
+![](man/figures/slider.png)
 
 There are a couple of continuous input variables in our model (`AGE` and
 `CDRSB_bl`), so we can create them as follows:
@@ -107,10 +104,7 @@ cdrsb_input <- climo::create_input('CDRSB_bl', label='Baseline CDR-SB', type='co
 Categorical inputs, on the other hand, are represented by dropdowns for
 discrete variables.
 
-<figure>
-<img src="man/figures/dropdown.png" alt="dropdown image" />
-<figcaption aria-hidden="true">dropdown image</figcaption>
-</figure>
+![](man/figures/dropdown.png)
 
 There is also one categorical input variable in the model which we can
 create in a similar way:
@@ -129,6 +123,33 @@ represents the time variable.
 ``` r
 time_input <- climo::create_input('time', label='Years from baseline', type='continuous', options=c(0, 0.5, 1, 1.5, 2), is_time=TRUE)
 ```
+
+Finally, we have the inputs for all of the five variables in the model
+and we can actually add them to the model.
+
+``` r
+climo_model %>% add_inputs(
+    age_input,
+    cdrsb_input,
+    gender_input,
+    time_input
+)
+```
+
+By adding the inputs to the model, they will actually show up at
+climo.ai and users can interact with the model. You can see the example
+at climo.ai/climo/example-r-lme
+
+And just to note, if you ever lose track of your model then you can
+always retrieve it back from the platform:
+
+``` r
+climo_model <- climo::retrieve_model('climo/example-r-lme')
+```
+
+The platform is smart enough to know which models are yours and which
+aren’t based on your API key – so no one else besides you can edit your
+models in any way.
 
 ### Add model display
 
