@@ -1,6 +1,6 @@
 Package: climo
 Type: Package
-Title: R API for climo.ai
+Title: R API for the climo.ai platform
 Version: 0.1.0
 Author: Nicholas Cullen
 Maintainer: Nicholas Cullen <nick@climo.ai>
@@ -24,4 +24,8 @@ Imports:
     tibble,
     tidyr,
     vetiver
+Suggests:
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
 RoxygenNote: 7.2.3

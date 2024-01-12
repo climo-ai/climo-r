@@ -7,12 +7,12 @@
 create_input(
   variable,
   label = NULL,
-  type = c("continuous", "categorical"),
-  min = NULL,
-  max = NULL,
-  step = NULL,
+  variable_type = c("numeric", "character"),
+  min_value = NULL,
+  max_value = NULL,
+  step_value = NULL,
   options = NULL,
-  initial = NULL,
+  initial_value = NULL,
   is_time = FALSE
 )
 }
@@ -23,6 +23,8 @@ create_input(
 Title
 }
 \examples{
-input1 <- create_input('EXAMPLE', 'Example', 'continuous', min=0, max=10, step=1, initial=5)
-input2 <- create_input('EXAMPLE2', 'Example2', 'categorical', options=c('a','b'), initial='a')
+input1 <- create_input('EXAMPLE', 'Example', 'numeric', min_value=0,
+max_value=10, step_value=1, initial_value=5)
+input2 <- create_input('EXAMPLE2', 'Example2', 'character',
+options=c('a','b'), initial_value='a')
 }
