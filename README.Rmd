@@ -59,7 +59,7 @@ library(climo)
 climo_model <- climo::create_model(model, name="example-model', area='Alzheimers Disease')
 ```
 
-```R
+```{r}
 hist(sample(1:1000,1000))
 ```
 
