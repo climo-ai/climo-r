@@ -59,10 +59,6 @@ library(climo)
 climo_model <- climo::create_model(model, name="example-model', area='Alzheimers Disease')
 ```
 
-```{r}
-hist(sample(1:1000,1000))
-```
-
 It's that simple! Now the model will exist on climo.ai and you can navigate to it on the web via the URL `climo.ai/{your_username}/example-model`. 
 
 To note, there are other parameters that can be set in the `create_model()` functions -- things like giving your model some tags, setting the model visibility to private, or assigning your model to an organization.
