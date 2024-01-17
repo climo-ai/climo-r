@@ -13,10 +13,13 @@ follows the belief that individuals, labs, and companies can contribute
 a great deal to building better clinical prediction models by sharing
 models rather than entire datasets.
 
-## Installation
+## Quickstart
 
-You can install the development version of climo with the following
-statement:
+This short overview of the climo package will go through installation
+and creating a model that can be visualized at climo.ai.
+
+To start, you can install the development version of climo with the
+following statement:
 
 ``` r
 devtools::install_github("climo-ai/climo-r")
@@ -40,6 +43,39 @@ start R.
 
 You can check that your API key is correctly set by running
 `Sys.getenv('CLIMO_API_KEY')`
+
+Now, let’s create a model that can be uploaded to climo.ai using the
+example dataset included in the climo package:
+
+``` r
+library(climo)
+library(nlme)
+
+model <- nlme::lme(CDRSB ~ CDRSB_bl + AGE + GENDER + TIME*CDRSB_bl,
+                   random = ~ TIME | ID,
+                   control = nlme::lmeControl(
+                      maxIter = 1e10,
+                      msMaxIter = 1000,
+                      opt = "optim"
+                   ),
+                   data = climo::example,
+                   na.action = stats::na.omit)
+```
+
+This `lme` model can then be used to create a climo model. All that is
+needed is to call the `create_model` function and pass in the minimum
+required arguments of the model object, a name for the model, and the
+clinical area to which the model belongs (here, Alzheimer’s Disease):
+
+``` r
+climo_model <- climo::create_model(model, name="example-model', area='Alzheimers Disease')
+```
+
+And just like that, we now have a model upload to climo.ai. To visualize
+the model interactively, we can go to climo.ai and visit our model page,
+where we are able to add model inputs from the settings page.
+Alternatively, we can add inputs directly from the climo package as
+shown in the `Create your own model` exmaple.
 
 ## Create your own model
 
@@ -153,7 +189,60 @@ models in any way.
 
 ### Add model display
 
+Now that the model has inputs, it is time to specify the display. The
+display parameters control how the acutal figure that gets plotted looks
+like. At this time, there is only one parameter available: the output
+label which will serve as the y-axis label. Adding the display is
+simple:
+
+``` r
+climo_model %>% add_display(output_label = 'CDR-SB')
+```
+
+Now, when the figure is plotted it will show the correct output label
+rather than the default value of “Output”.
+
 ### Add model details
+
+The model visualization is now complete, but there is still more to do.
+It’s important to provide details about an uploaded model so that other
+users can get an idea of how the model was fit, what its limitations
+are, and what the appropriate context for the model is. This information
+can be provided in the model details, which is by default composed of
+four sections:
+
+- Participants
+- Outcome
+- Predictors
+- Methods
+
+The participants section should fully describe the number and
+characteristics of the individuals whose data was used when fitting the
+model, along with any other important information about the study
+cohort. The outcome section should describe how the outcome variable was
+collected and its relevance for the disease. Similarly, the predictors
+section should describe how all of the predictors (or inputs or
+covariates - however you would like to call them) were collected.
+Finally, the methods section should give a full description of the model
+itself – how it was fit and evaluated, and what software packages were
+used.
+
+Following the same pattern as before, the model details can be added
+like this:
+
+``` r
+climo_model %>% add_details(
+  participants = "This is the participants section",
+  outcome = "This is the outcome section",
+  predictors = "This is the predictors section",
+  methods = "This is the methods section",
+)
+```
+
+Now, we have a model on the climo.ai platform which is available for
+users to interactive visualize and which also includes key details about
+the model. The final model can be visited at
+`www.climo.ai/{your_username}/example-model`.
 
 ## Evaluate another user’s model
 
