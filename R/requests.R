@@ -1,6 +1,15 @@
 
 
+retrieve_vetiver_model <- function(user, name) {
+  response <- httr::GET(glue('{MODEL_URL}users/{user}/models/{name}/download'))
+  status <- response$status
+  tmp <- tempfile(fileext = '.Rds')
+  on.exit(unlink(tmp))
+  writeBin(response$content, tmp)
+  v_model <- readRDS(tmp)
 
+  return(v_model)
+}
 
 API_GET <- function(url) {
   token <- token()

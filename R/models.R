@@ -1,5 +1,6 @@
 
 API_URL <- 'https://climo-api-1253e7067c8b.herokuapp.com'
+MODEL_URL <- 'http://127.0.0.1:5066/'
 
 # list all models
 #' Title
