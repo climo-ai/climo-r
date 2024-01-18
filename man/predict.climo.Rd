@@ -12,3 +12,11 @@
 \description{
 Perform prediction / inference on a climo model
 }
+\examples{
+model <- retrieve_model('nickcullen31/mixed-effects-model')
+newdata <- data.frame(AGE = 75,
+                      CDRSB_bl = 2.5,
+                      PTGENDER = 'Male',
+                      time = c(0,1,2))
+result <- predict(model, newdata)
+}

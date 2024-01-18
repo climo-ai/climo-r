@@ -1,5 +1,5 @@
 
-API_URL <- 'http://127.0.0.1:8000'
+API_URL <- 'https://climo-api-1253e7067c8b.herokuapp.com'
 
 # list all models
 #' Title
@@ -36,10 +36,11 @@ print.climo <- function(model) {
   cat('------------------', '\n')
   cat('created:', model$created_date, '\n')
   cat('area:', model$area, '\n')
-  cat('tags:', model$tags, '\n')
+  cat('tags:', paste(model$tags, collapse=', '), '\n')
   cat('inputs:', length(model$inputs), '\n')
   cat('\n')
 }
+
 # create a model
 #' Title
 #'

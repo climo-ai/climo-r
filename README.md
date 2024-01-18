@@ -244,10 +244,76 @@ users to interactive visualize and which also includes key details about
 the model. The final model can be visited at
 `www.climo.ai/{your_username}/example-model`.
 
-## Evaluate another user’s model
+## Validating models
 
-## Contribute data to a federation
+Besides visualizing and describing models on the climo.ai platform, it
+is also possible to evaluate models. A model should always be internally
+validated using the data on which the model was trained, but evaluating
+models on external datasets is also worthwhile.
 
-## Fit a federated model
+If you have a cohort dataset, feel free to explore other models on
+climo.ai which you are able to externally validate. This improves the
+credibility and validity of clinical predictions models.
 
-## List all models
+Validating models from the climo package is quite straight-forward.
+First, start by retrieving the model which you want to validate. We can
+use the model we created previously to show how an internal validation
+can be performed.
+
+``` r
+library(climo)
+model <- retrieve_model('nickcullen31/example-prognostic-model')
+```
+
+To understand what variables the model expects, we can print out the
+inputs to the model:
+
+``` r
+print(model$inputs)
+```
+
+However, since we are validating the model on the same data which we
+used to fit the model, we do not need to worry about changing any
+variable names. Now, we call the function to evaluate the model on the
+dataset:
+
+``` r
+results <- evaluate_model(model, newdata = climo::example_data)
+```
+
+Notice that we used the `climo::example_data` dataset which is included
+in the climo package, but you would pass in whatever dataframe you used
+to fit the original model.
+
+Additionally, you may notice that we didn’t specify any methods to
+evaluate the model. In fact, climo knows from the model type how it
+should be evaluating. In the case of our mixed-effects model with a
+continuous outcome, the R^2 value will be calculated.
+
+Finally, we can submit our validation to the climo.ai platform so that
+the community can see that we have appropriately validated our model.
+
+``` r
+model %>% add_validation(results, cohort='Training Data', internal=TRUE)
+```
+
+The R^2 value will show up on our model’s Validation page, as will two
+figures: a scatter plot of the observed outcome values versus the
+predicted outcome values, and a box plot showing the distribution of
+error values (predicted - observd values).
+
+As other people validate your model with external data, those results
+will also show up in a nice comparison table and figure on your model’s
+validation page.
+
+## Creating a model federation
+
+### Invite collaborators
+
+### Contribute data
+
+### Fit the model
+
+### Upload the results
+
+## 
