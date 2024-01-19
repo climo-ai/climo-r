@@ -1,19 +1,6 @@
 
 
-retrieve_vetiver_model <- function(user, name) {
-  token <- token()
-  response <- httr::GET(glue('{API_URL}/users/{user}/models/{name}/download'),
-                        httr::add_headers('Authorization' = glue('Bearer {token}')))
-  status <- response$status
-  if (status == 403) stop('You must be authenticated to perform this action.
-                          Have you set CLIMO_API_KEY with your token from climo.ai?')
-  tmp <- tempfile(fileext = '.Rds')
-  on.exit(unlink(tmp))
-  writeBin(response$content, tmp)
-  v_model <- readRDS(tmp)
 
-  return(v_model)
-}
 
 API_GET <- function(url) {
   token <- token()

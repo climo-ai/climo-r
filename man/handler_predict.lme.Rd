@@ -4,7 +4,7 @@
 \alias{handler_predict.lme}
 \title{Title}
 \usage{
-handler_predict.lme(vetiver_model, ...)
+\method{handler_predict}{lme}(vetiver_model, ...)
 }
 \arguments{
 \item{...}{}

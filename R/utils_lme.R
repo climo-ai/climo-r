@@ -5,6 +5,7 @@
 #'
 #' @return
 #' @export
+#' @importFrom vetiver handler_predict
 #'
 #' @examples
 handler_predict.lme <- function(vetiver_model, ...) {
@@ -37,5 +38,13 @@ handler_predict.lme <- function(vetiver_model, ...) {
     }
 
     return(res)
+  }
+}
+
+
+handler_evaluate.lme <- function(vetiver_model, ...) {
+  predict_fn <- handler_predict(vetiver_model, ...)
+  function(newdata) {
+    prediction <- newdata
   }
 }
