@@ -83,12 +83,19 @@ add_validation <- function(model, validation, cohort, internal) {
   record <- list(
     cohort = cohort,
     internal = internal,
+    metric = results$metric,
+    result = results$result,
     file = httr::upload_file(tmp_file)
   )
 
-  response <- API_POST(glue('{API_URL}/users/{model$user}/models/{model$slug}/validations/'), record)
-  print(response)
-
+  response <- API_POST(glue('{API_URL}/users/{model$user}/models/{model$slug}/validations/'),
+                       record,
+                       encode='multipart')
+  if (response$status == 201) {
+    cat('Validation successfully added')
+  } else {
+    stop('Validation not added. Does this model already have a validation from this cohort?')
+  }
 }
 
 
