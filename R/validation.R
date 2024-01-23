@@ -61,9 +61,9 @@ evaluate_model <- function(model, newdata) {
       )
     )
   } else {
+    # calculate auc for binary endpoints
     res <- pROC::roc(newdata[[output_var]] ~ pred, quiet=T)
 
-    # calculate accuracy for categorical endpoints
     record <- list(
       result = res$auc,
       metric = 'auc',
