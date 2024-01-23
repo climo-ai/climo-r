@@ -24,8 +24,14 @@ print.climoValidation <- function(validation) {
 #' @export
 #'
 #' @examples
+#' # continuous example
 #' model <- retrieve_model('nickcullen31/mixed-effects-model')
-#' newdata <- climo::example_data
+#' newdata <- climo::example_lme_data
+#' results <- evaluate_model(model, newdata)
+#'
+#' # binary example
+#' model <- retrieve_model('tuoooliu/smoking-risk-on-cvd')
+#' newdata <- climo::example_glm_data
 #' results <- evaluate_model(model, newdata)
 evaluate_model <- function(model, newdata) {
   v_model <- retrieve_vetiver_model(model$user, model$slug)
@@ -44,18 +50,32 @@ evaluate_model <- function(model, newdata) {
 
   pred <- predict_fn(list(body=newdata[,-1]))$.pred
 
-  metric_value <- cor(newdata[[1]], pred)
-
-  result <- list(
-    result = metric_value,
-    metric = 'r2',
-    data = tibble::tibble(
-      observed = newdata[[1]],
-      predicted = pred
+  if (is.numeric(newdata[[output_var]])) {
+    # calculate R2 for continuous outcomes
+    record <- list(
+      result = cor(newdata[[1]], pred),
+      metric = 'r2',
+      data = tibble::tibble(
+        observed = newdata[[1]],
+        predicted = pred
+      )
     )
-  )
-  class(result) <- 'climoValidation'
-  return(result)
+  } else {
+    res <- pROC::roc(newdata[[output_var]] ~ pred, quiet=T)
+
+    # calculate accuracy for categorical endpoints
+    record <- list(
+      result = res$auc,
+      metric = 'auc',
+      data = tibble::tibble(
+        observed = newdata[[output_var]],
+        predicted = pred
+      )
+    )
+  }
+
+  class(record) <- 'climoValidation'
+  return(record)
 }
 
 
@@ -106,6 +126,23 @@ retrieve_validation <- function(model, cohort) {
   validation_name <- glue('{model$user}__{model$slug}__{cohort}')
 }
 
+
+evaluate.lm <- function(model, newdata) {
+
+    predict_fn <- handler_predict(model, ...)
+
+    pred <- predict_fn(list(body=newdata))$.pred
+
+    metric_value <- cor(newdata[[1]], pred)
+    result <- list(
+        result = metric_value,
+        metric = 'r2',
+        data = tibble::tibble(
+          observed = newdata[[1]],
+          predicted = pred)
+        )
+    return(result)
+}
 
 
 

@@ -13,7 +13,13 @@ evaluate_model(model, newdata)
 Evaluate a climo model on new data
 }
 \examples{
+# continuous example
 model <- retrieve_model('nickcullen31/mixed-effects-model')
-newdata <- climo::example_data
+newdata <- climo::example_lme_data
+results <- evaluate_model(model, newdata)
+
+# binary example
+model <- retrieve_model('tuoooliu/smoking-risk-on-cvd')
+newdata <- climo::example_glm_data
 results <- evaluate_model(model, newdata)
 }
