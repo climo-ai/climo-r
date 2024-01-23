@@ -85,12 +85,15 @@ add_validation <- function(model, validation, cohort, internal) {
     internal = internal,
     metric = results$metric,
     result = results$result,
-    file = httr::upload_file(tmp_file)
+    raw_data = list(
+      observed = results$data$observed,
+      predicted = results$data$predicted
+    )
   )
 
   response <- API_POST(glue('{API_URL}/users/{model$user}/models/{model$slug}/validations/'),
                        record,
-                       encode='multipart')
+                       encode='json')
   if (response$status == 201) {
     cat('Validation successfully added')
   } else {
