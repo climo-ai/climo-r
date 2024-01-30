@@ -23,6 +23,8 @@ Climo is an open-source package that lets you quickly build an online interface 
 The features of climo are specifically tailored towards clinical prediction models. We believe that collaboration within the medical community can be improved by focusing on sharing models rather than datasets. No data is ever shared when you use climo!
 
 
+![preview](man/figures/recording.gif)
+
 ## Quickstart
 
 This short overview of the climo package will go through installation and creating a model that can be visualized at clinicalmodels.io.

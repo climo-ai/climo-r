@@ -17,9 +17,10 @@ prediction models. We believe that collaboration within the medical
 community can be improved by focusing on sharing models rather than
 datasets. No data is ever shared when you use climo!
 
-
-https://github.com/climo-ai/climo-r/assets/13004360/90728753-8381-4cd6-8f20-21925bc3f0f1
-
+<figure>
+<img src="man/figures/recording.gif" alt="preview" />
+<figcaption aria-hidden="true">preview</figcaption>
+</figure>
 
 ## Quickstart
 
