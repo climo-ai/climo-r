@@ -1,28 +1,24 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Climo - Instantly deploy and share clinical prediction models fit in R
+# Climo - Instantly deploy and share clinical prediction models from R
 
 <!-- badges: start -->
 <!-- badges: end -->
 
 Climo is an open-source package that lets you quickly build an online
-interface to your fitted R models. Deployed models can be freely shared
-with others so that anyone can explore your model’s predictions. You can
-also use climo to retrieve and locally validate other models on your
-data.
+interface to your R models. Deployed models can be freely shared with
+others so that anyone can explore your model’s predictions. You can also
+retrieve and validate other interesting models locally on your data.
 
-The features of climo are specifically tailored towards clinical
-prediction models. We believe that collaboration within the medical
-community can be improved by focusing on sharing models rather than
-datasets. No data is ever shared when you use climo!
+The features of climo are specifically geared towards models with a
+clinical medicine focus. We believe that collaboration within the
+medical community can be improved by focusing on sharing models rather
+than datasets.
 
-<figure>
-<img src="man/figures/recording.gif" alt="preview" />
-<figcaption aria-hidden="true">preview</figcaption>
-</figure>
+![](man/figures/recording.gif)
 
-## Quickstart
+## Installation
 
 This short overview of the climo package will go through installation
 and creating a model that can be visualized at clinicalmodels.io.
@@ -52,6 +48,8 @@ start R.
 
 You can check that your API key is correctly set by running
 `Sys.getenv('CLIMO_API_KEY')`
+
+## Creating and deploying a model
 
 Now, let’s create a model that can be uploaded to clinicalmodels.io
 using the example dataset included in the climo package:
@@ -85,44 +83,6 @@ visualize the model interactively, we can go to clinicalmodels.io and
 visit our model page, where we are able to add model inputs from the
 settings page. Alternatively, we can add inputs directly from the climo
 package as shown in the `Create your own model` exmaple.
-
-## Create your own model
-
-Let’s say that you want to fit a mixed-effects model on data from
-Alzheimer’s disease patients and then share it on the clinicalmodels.io
-platform.
-
-First, you fit the model with your method of choice (here, the `nlme`
-package):
-
-``` r
-library(nlme)
-model <- lme(x ~ y, data)
-```
-
-Now, you can upload the model to clinicalmodels.io using the
-`climo::create_model()` function. To create a climo model, you need at
-least three things: a fitted object (e.g., lme object), a name for your
-climo model, and a clinical area.
-
-``` r
-library(climo)
-climo_model <- climo::create_model(model, name="example-model', area='Alzheimers Disease')
-```
-
-It’s that simple! Now the model will exist on clinicalmodels.io and you
-can navigate to it on the web via the URL
-`clinicalmodels.io/{your_username}/example-model`.
-
-To note, there are other parameters that can be set in the
-`create_model()` functions – things like giving your model some tags,
-setting the model visibility to private, or assigning your model to an
-organization.
-
-However, you won’t be able to actually see your model’s output at
-clinicalmodels.io until you create the model signature which tells
-clinicalmodels.io how to build the user interface which allows users to
-interact with your model. We’ll show that next:
 
 ### Add model inputs
 
@@ -317,14 +277,7 @@ As other people validate your model with external data, those results
 will also show up in a nice comparison table and figure on your model’s
 validation page.
 
-## Creating a model federation
+## Questions?
 
-### Invite collaborators
-
-### Contribute data
-
-### Fit the model
-
-### Upload the results
-
-## 
+If you have any questions, feel free to submit an issue here on GitHub
+or reach out to us at <info@clinicalmodels.io>.
