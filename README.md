@@ -16,7 +16,7 @@ clinical medicine focus. We believe that collaboration within the
 medical community can be improved by focusing on sharing models rather
 than datasets.
 
-![](man/figures/recording.gif)
+![](man/figures/recording-spedup.gif)
 
 ## Installation
 
