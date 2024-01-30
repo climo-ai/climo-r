@@ -1,22 +1,26 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# climo
+# Climo: Deploy and share clinical prediction models in minutes
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The climo package is the R interface to the climo.ai platform. With the
-climo package, you can create, evaluate, share, and collaborate on
-clinical models directly from the R language. The climo.ai platform
-follows the belief that individuals, labs, and companies can contribute
-a great deal to building better clinical prediction models by sharing
-models rather than entire datasets.
+Climo is an open-source package that lets you quickly build an online
+interface to your fitted R models. Deployed models can be freely shared
+with others so that anyone can explore your model’s predictions. You can
+also use climo to retrieve and locally validate other models on your
+data.
+
+The features of climo are specifically tailored towards clinical
+prediction models. We believe that collaboration within the medical
+community can be improved by focusing on sharing models rather than
+datasets. No data is ever shared when you use climo!
 
 ## Quickstart
 
 This short overview of the climo package will go through installation
-and creating a model that can be visualized at climo.ai.
+and creating a model that can be visualized at clinicalmodels.io.
 
 To start, you can install the development version of climo with the
 following statement:
@@ -26,10 +30,10 @@ devtools::install_github("climo-ai/climo-r")
 ```
 
 Additionally, to use most of the climo R functions you will need to
-retrieve your API key from the climo.ai platform and set it in your R
-environment. After signing in at climo.ai, navigate to Home \> Profile
-and copy the API key. Then, run the following command in R to make your
-key available for the climo package:
+retrieve your API key from the clinicalmodels.io platform and set it in
+your R environment. After signing in at clinicalmodels.io, navigate to
+Home \> Profile and copy the API key. Then, run the following command in
+R to make your key available for the climo package:
 
 ``` r
 Sys.setenv('CLIMO_API_KEY' = '__your key__')
@@ -44,8 +48,8 @@ start R.
 You can check that your API key is correctly set by running
 `Sys.getenv('CLIMO_API_KEY')`
 
-Now, let’s create a model that can be uploaded to climo.ai using the
-example dataset included in the climo package:
+Now, let’s create a model that can be uploaded to clinicalmodels.io
+using the example dataset included in the climo package:
 
 ``` r
 library(climo)
@@ -71,16 +75,17 @@ clinical area to which the model belongs (here, Alzheimer’s Disease):
 climo_model <- climo::create_model(model, name="example-model', area='Alzheimers Disease')
 ```
 
-And just like that, we now have a model upload to climo.ai. To visualize
-the model interactively, we can go to climo.ai and visit our model page,
-where we are able to add model inputs from the settings page.
-Alternatively, we can add inputs directly from the climo package as
-shown in the `Create your own model` exmaple.
+And just like that, we now have a model upload to clinicalmodels.io. To
+visualize the model interactively, we can go to clinicalmodels.io and
+visit our model page, where we are able to add model inputs from the
+settings page. Alternatively, we can add inputs directly from the climo
+package as shown in the `Create your own model` exmaple.
 
 ## Create your own model
 
 Let’s say that you want to fit a mixed-effects model on data from
-Alzheimer’s disease patients and then share it on the climo.ai platform.
+Alzheimer’s disease patients and then share it on the clinicalmodels.io
+platform.
 
 First, you fit the model with your method of choice (here, the `nlme`
 package):
@@ -90,7 +95,7 @@ library(nlme)
 model <- lme(x ~ y, data)
 ```
 
-Now, you can upload the model to climo.ai using the
+Now, you can upload the model to clinicalmodels.io using the
 `climo::create_model()` function. To create a climo model, you need at
 least three things: a fitted object (e.g., lme object), a name for your
 climo model, and a clinical area.
@@ -100,9 +105,9 @@ library(climo)
 climo_model <- climo::create_model(model, name="example-model', area='Alzheimers Disease')
 ```
 
-It’s that simple! Now the model will exist on climo.ai and you can
-navigate to it on the web via the URL
-`climo.ai/{your_username}/example-model`.
+It’s that simple! Now the model will exist on clinicalmodels.io and you
+can navigate to it on the web via the URL
+`clinicalmodels.io/{your_username}/example-model`.
 
 To note, there are other parameters that can be set in the
 `create_model()` functions – things like giving your model some tags,
@@ -110,15 +115,15 @@ setting the model visibility to private, or assigning your model to an
 organization.
 
 However, you won’t be able to actually see your model’s output at
-climo.ai until you create the model signature which tells climo.ai how
-to build the user interface which allows users to interact with your
-model. We’ll show that next:
+clinicalmodels.io until you create the model signature which tells
+clinicalmodels.io how to build the user interface which allows users to
+interact with your model. We’ll show that next:
 
 ### Add model inputs
 
 The model inputs make up the interactive user interface to your model on
-the climo.ai platform. They’re necessary if you want users to be able to
-interact with your model at climo.ai.
+the clinicalmodels.io platform. They’re necessary if you want users to
+be able to interact with your model at clinicalmodels.io.
 
 There are two types of model inputs: continuous inputs and categorical
 inputs.
@@ -173,8 +178,8 @@ climo_model %>% add_inputs(
 ```
 
 By adding the inputs to the model, they will actually show up at
-climo.ai and users can interact with the model. You can see the example
-at climo.ai/climo/example-r-lme
+clinicalmodels.io and users can interact with the model. You can see the
+example at clinicalmodels.io/climo/example-r-lme
 
 And just to note, if you ever lose track of your model then you can
 always retrieve it back from the platform:
@@ -239,21 +244,21 @@ climo_model %>% add_details(
 )
 ```
 
-Now, we have a model on the climo.ai platform which is available for
-users to interactive visualize and which also includes key details about
-the model. The final model can be visited at
-`www.climo.ai/{your_username}/example-model`.
+Now, we have a model on the clinicalmodels.io platform which is
+available for users to interactive visualize and which also includes key
+details about the model. The final model can be visited at
+`www.clinicalmodels.io/{your_username}/example-model`.
 
 ## Validating models
 
-Besides visualizing and describing models on the climo.ai platform, it
-is also possible to evaluate models. A model should always be internally
-validated using the data on which the model was trained, but evaluating
-models on external datasets is also worthwhile.
+Besides visualizing and describing models on the clinicalmodels.io
+platform, it is also possible to evaluate models. A model should always
+be internally validated using the data on which the model was trained,
+but evaluating models on external datasets is also worthwhile.
 
 If you have a cohort dataset, feel free to explore other models on
-climo.ai which you are able to externally validate. This improves the
-credibility and validity of clinical predictions models.
+clinicalmodels.io which you are able to externally validate. This
+improves the credibility and validity of clinical predictions models.
 
 Validating models from the climo package is quite straight-forward.
 First, start by retrieving the model which you want to validate. We can
@@ -290,8 +295,9 @@ evaluate the model. In fact, climo knows from the model type how it
 should be evaluating. In the case of our mixed-effects model with a
 continuous outcome, the R^2 value will be calculated.
 
-Finally, we can submit our validation to the climo.ai platform so that
-the community can see that we have appropriately validated our model.
+Finally, we can submit our validation to the clinicalmodels.io platform
+so that the community can see that we have appropriately validated our
+model.
 
 ``` r
 model %>% add_validation(results, cohort='Training Data', internal=TRUE)
