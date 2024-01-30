@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Climo: Deploy and share clinical prediction models in minutes
+# Climo - Instantly deploy and share clinical prediction models fit in R
 
 <!-- badges: start -->
 <!-- badges: end -->
